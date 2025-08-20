@@ -11,7 +11,7 @@ class QuantumRegister:
         self.state = state
 
     def proba(self, round_values=False):
-        probs = np.abs(self.state)**2
+        probs = np.abs(self.state)
         if round_values:
             return [round(float(probs[i]), 2) for i in range(len(self.state))]
         return [float(probs[i]) for i in range(len(self.state))]

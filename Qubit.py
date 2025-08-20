@@ -29,12 +29,12 @@ class Qubit :
     def proba(self, round_values=False):
         if round_values:
             return {
-                "0" : round(abs(self.alpha)**2, 2),
-                "1" : round(abs(self.beta)**2, 2)
+                "0" : round(abs(self.alpha), 2),
+                "1" : round(abs(self.beta), 2)
             }
         return {
-            "0" : abs(self.alpha)**2,
-            "1" : abs(self.beta)**2
+            "0" : abs(self.alpha),
+            "1" : abs(self.beta)
         }
 
     def measure(self, round_values=False):
