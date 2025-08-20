@@ -1,42 +1,42 @@
-# qubit_simulation_python - Mini Simulateur de Qubits en Python 🧮⚛️
+# qubit_simulation_python - Mini Qubit Simulator in Python 🧮⚛️
 
-Ce projet est une petite librairie éducative pour manipuler des **qubits**, appliquer des **portes quantiques** et créer des **registres quantiques** en Python.  
-Il permet de visualiser les états, calculer les probabilités et simuler des mesures.
-
----
-
-## 📂 Structure du projet
-
-├── main.py # Exemple d'utilisation
-├── Qubit.py # Classe Qubit
-├── gates.py # Définitions des portes quantiques
-└── QuantumRegister.py # Classe QuantumRegister (multi-qubits)
+This project is a small educational library to manipulate **qubits**, apply **quantum gates**, and build **quantum registers** in Python.  
+It allows you to visualize states, compute probabilities, and simulate measurements.
 
 ---
 
-## ⚡ Fonctionnalités
+## 📂 Project Structure
+
+├── main.py              # Example usage  
+├── Qubit.py             # Qubit class  
+├── gates.py             # Quantum gates definitions  
+└── QuantumRegister.py   # QuantumRegister class (multi-qubits)  
+
+---
+
+## ⚡ Features
 
 - **Qubit**
-  - Définir un qubit avec amplitudes complexes `alpha` et `beta`
-  - Normalisation automatique de l'état
-  - Calcul des probabilités (`proba`)
-  - Simulation de mesure (`measure`)
-  - Affichage lisible (`__repr__`)
+  - Define a qubit with complex amplitudes `alpha` and `beta`
+  - Automatic state normalization
+  - Probability calculation (`proba`)
+  - Measurement simulation (`measure`)
+  - Readable display (`__repr__`)
 
-- **Portes quantiques (`gates.py`)**
+- **Quantum Gates (`gates.py`)**
   - Pauli-X, Y, Z
   - Hadamard
-  - Application de portes sur un qubit avec `apply_gate`
+  - Apply gates to a qubit with `apply_gate`
 
 - **QuantumRegister**
-  - Combiner plusieurs qubits en un registre (produit tensoriel)
-  - Calculer les probabilités de tous les états de base (`proba`)
-  - Simuler une mesure globale (`measure`)
-  - Affichage de l’état global
+  - Combine several qubits into a register (tensor product)
+  - Compute probabilities of all basis states (`proba`)
+  - Simulate a global measurement (`measure`)
+  - Display of the global state
 
 ---
 
-## 🚀 Exemple d'utilisation
+## 🚀 Example Usage
 
 ### main.py
 ```python
@@ -44,23 +44,23 @@ from Qubit import Qubit
 import gates
 from QuantumRegister import QuantumRegister
 
-# Créer un qubit en |0>
+# Create a qubit in |0>
 q1 = Qubit(1, 0)
 print(q1)
 print(q1.proba())
-print("Mesure qubit 1 :", q1.measure())
+print("Qubit 1 measurement:", q1.measure())
 
-# Appliquer Hadamard -> superposition
+# Apply Hadamard -> superposition
 q1 = gates.apply_gate(gates.H, q1)
 
-# Créer un deuxième qubit en |1>
+# Create a second qubit in |1>
 q2 = Qubit(0, 1)
 print(q2)
 print(q2.proba())
-print("Mesure qubit 2 :", q2.measure())
+print("Qubit 2 measurement:", q2.measure())
 
-# Construire un registre quantique avec 2 qubits
+# Build a quantum register with 2 qubits
 qr = QuantumRegister([q1, q2])
 print(qr)
-print("Probabilités :", qr.proba())
-print("Mesure registre :", qr.measure())
+print("Probabilities:", qr.proba())
+print("Register measurement:", qr.measure())
