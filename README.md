@@ -23,16 +23,21 @@ It allows you to visualize states, compute probabilities, and simulate measureme
   - Measurement simulation (`measure`)
   - Readable display (`__repr__`)
 
-- **Quantum Gates (`gates.py`)**
+- **Quantum Gates (`gates.py`) for single qubit**
   - Pauli-X, Y, Z
   - Hadamard
-  - Apply gates to a qubit with `apply_gate`
+  - Apply gates to a qubit with `apply_gate_single`
+ 
+- **Quantum Gates (`gates.py`) for double qubit quantum register**
+  - CNOT, CZ, SWAP
+  - Apply gates do a double qubit QR with `apply_gate_double`
 
 - **QuantumRegister**
   - Combine several qubits into a register (tensor product)
   - Compute probabilities of all basis states (`proba`)
   - Simulate a global measurement (`measure`)
   - Display of the global state
+  - Set new state with `set_state`
 
 ---
 
@@ -44,23 +49,16 @@ from Qubit import Qubit
 import gates
 from QuantumRegister import QuantumRegister
 
-# Create a qubit in |0>
-q1 = Qubit(1, 0)
-print(q1)
-print(q1.proba())
-print("Qubit 1 measurement:", q1.measure())
+#Simulation of Bell's state
 
-# Apply Hadamard -> superposition
-q1 = gates.apply_gate(gates.H, q1)
+q1 = Qubit.Qubit(1, 0)
+q2 = Qubit.Qubit(1, 0)
+q1 = gates.apply_gate_single(gates.H, q1) #Applying Hadamard on the first qubit
+qr = QuantumRegister.QuantumRegister([q1, q2])
+gates.apply_gate_double(gates.CNOT, qr)
 
-# Create a second qubit in |1>
-q2 = Qubit(0, 1)
-print(q2)
-print(q2.proba())
-print("Qubit 2 measurement:", q2.measure())
+#Bell's state
+print(qr.__repr__())
+print(qr.proba(round_values=True))
 
-# Build a quantum register with 2 qubits
-qr = QuantumRegister([q1, q2])
-print(qr)
-print("Probabilities:", qr.proba())
-print("Register measurement:", qr.measure())
+```
