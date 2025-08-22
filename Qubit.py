@@ -1,4 +1,5 @@
 # qubit.py
+from matplotlib.pylab import norm
 import numpy as np
 
 class Qubit :
@@ -8,11 +9,13 @@ class Qubit :
         beta = proba de |1>
         '''
         norm = np.sqrt(abs(alpha)**2 + abs(beta)**2)
-        if norm > 1:
-            alpha /= norm
-            beta /= norm
+        if norm == 0:
+            raise ValueError("Qubit cannot have zero amplitude")
+        alpha /= norm
+        beta /= norm
         self.alpha = alpha
         self.beta = beta
+
     
     def state(self):
         return np.array([[self.alpha], [self.beta]])
@@ -29,12 +32,12 @@ class Qubit :
     def proba(self, round_values=False):
         if round_values:
             return {
-                "0" : round(abs(self.alpha), 2),
-                "1" : round(abs(self.beta), 2)
+                "0" : round(abs(self.alpha)**2, 2),
+                "1" : round(abs(self.beta)**2, 2)
             }
         return {
-            "0" : abs(self.alpha),
-            "1" : abs(self.beta)
+            "0" : abs(self.alpha)**2,
+            "1" : abs(self.beta)**2
         }
 
     def measure(self, round_values=False):
