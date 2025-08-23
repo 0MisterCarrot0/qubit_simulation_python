@@ -44,3 +44,10 @@ class Qubit :
         import random
         p0, _ = self.proba(round_values).values()
         return 0 if random.random() <= p0 else 1
+    
+    def is_state_valid(self):
+        norm = abs(self.alpha)**2 + abs(self.beta)**2
+        return np.isclose(norm, 1)
+    
+    def is_probabilities_valid(self):
+        return np.isclose(sum(self.proba().values()), 1)
